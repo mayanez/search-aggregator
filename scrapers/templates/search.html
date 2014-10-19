@@ -1,0 +1,48 @@
+<head>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var table = $("#search-results").DataTable({
+				"order" : [[ 6, "desc"]]
+			});
+
+			$("#search-results tbody").on("click", "tr", function() {
+				$(this).toggleClass('selected');
+			});
+		});
+	</script>
+	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css"></link>
+</head>
+<html>
+	<body>
+		<div>
+			<table id="search-results">
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Network</td>
+						<td>Channel</td>
+						<td>User</td>
+						<td>Pack #</td>
+						<td>Size</td>
+						<td>Requested</td>
+					</tr>
+				</thead>
+				<tbody>
+				{% for file in result %}
+					<tr>
+						<td>{{file.name}}</td>
+						<td>{{file.network}}</td>
+						<td>{{file.channel}}</td>
+						<td>{{file.user}}</td>
+						<td>{{file.number}}</td>
+						<td>{{file.size}}</td>
+						<td>{{file.requests}}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

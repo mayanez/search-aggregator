@@ -1,11 +1,12 @@
 class XDCCFile(object):
-	def __init__(self, name, network, channel, user, number, size):
+	def __init__(self, name, network, channel, user, number, size, requests):
 		self.__name = name
 		self.__network = network
 		self.__channel = channel
 		self.__user	= user
 		self.__number = number
 		self.__size = size
+		self.__requests = requests
 
 	def __str__(self):
 		return self.__name
@@ -50,5 +51,21 @@ class XDCCFile(object):
 	@number.setter
 	def number(self, value):
 		self.__number = value
+
+	@property
+	def size(self):
+		return self.__size
+
+	@size.setter
+	def size(self, value):
+		self.__size = value
+
+	@property
+	def requests(self):
+		return self.__requests
+
+	@requests.setter
+	def requests(self, value):
+		self.__requests = value
 
 

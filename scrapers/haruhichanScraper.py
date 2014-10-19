@@ -27,11 +27,12 @@ class haruhichanScraper(object):
 			file_info = a_file.findAll("td")
 			user = file_info[0].get_text()
 			number = file_info[1].get_text()
+			num_requested = file_info[2].get_text()
 			size = file_info[3].get_text()
 			name = file_info[4].get_text()
-			network = "Rizon"
+			network = "irc.rizon.net"
 			channel = "#intel"
-			xdcc_file = XDCCFile.XDCCFile(name, network, channel, user, number, size)
+			xdcc_file = XDCCFile.XDCCFile(name, network, channel, user, number, size, num_requested)
 			xdcc_file_list.append(xdcc_file)
 
 		return xdcc_file_list
