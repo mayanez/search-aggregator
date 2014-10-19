@@ -61,6 +61,9 @@ class ixircScraper(object):
 		response = requests.get(self.url, params=self.params)
 		soup = BeautifulSoup(response.text)
 
+		if soup.find("div", {"id": "results"}):
+			return -1
+		
 		page_numbers = soup.find("div", {"class" : "page-numbers"})
 		max_pages = page_numbers.findAll("a")[-1].get_text()
 		
