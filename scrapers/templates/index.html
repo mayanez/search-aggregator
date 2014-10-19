@@ -9,6 +9,9 @@
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+		<link href="//vjs.zencdn.net/4.9/video-js.css" rel="stylesheet">
+		<script src="//vjs.zencdn.net/4.9/video.js"></script>
 	</head>
 	<body>
 		<form role="form" action="/search">
@@ -18,5 +21,8 @@
  			</div>
  			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
+		<embed id="divxplayer" type="video/divx" width="1024" height="768" 
+		src ="http://files.yanez.us/doctor.mkv" autoPlay=\"false\" 
+		pluginspage=\"http://go.divx.com/plugin/download/\"></embed>
 	</body>
 </html>

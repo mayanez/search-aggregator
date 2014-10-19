@@ -34,7 +34,7 @@
 				<tbody>
 				{% for file in result %}
 					<tr>
-						<td>{{file.name}}</td>
+						<td><a href="/download?name={{file.name}}&server={{file.network}}&channel={{file.channel}}&user={{file.user}}&pack={{file.number}}">{{file.name}}</a></td>
 						<td>{{file.network}}</td>
 						<td>{{file.channel}}</td>
 						<td>{{file.user}}</td>

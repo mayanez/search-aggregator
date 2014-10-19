@@ -2,6 +2,7 @@ import requests
 import urllib
 import XDCCFile
 from bs4 import BeautifulSoup
+from urlparse import urlparse
 
 class ixircScraper(object):
 	def __init__(self):
@@ -41,8 +42,9 @@ class ixircScraper(object):
 		for a_file in file_list:
 			file_info = a_file.findAll("td")
 			name = file_info[0].get_text()
-			network = file_info[1].get_text()
-			channel = file_info[2].get_text()
+			parsed_network = urlparse(file_info[0].find("a", {"class": "result-dl"})["href"])
+			network = "{uri.hostname}".format(uri=parsed_network)
+			channel = file_info[2].get_text().replace('#', '')
 			user = file_info[3].get_text()
 			number = file_info[4].get_text()
 			gets = file_info[5].get_text()

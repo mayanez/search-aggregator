@@ -2,6 +2,8 @@ import haruhichanScraper
 import ixircScraper
 import os
 from flask import Flask, render_template, send_from_directory, request
+from Naked.toolshed.shell import execute_js, muterun_js
+from subprocess import call
 
 app = Flask(__name__)
 
@@ -29,6 +31,20 @@ def search():
 	xdcc_file_list = haruhichan_xdcc_file_list + ixirc_xdcc_file_list
 	return render_template('search.html', result=xdcc_file_list)
 
+@app.route("/download", methods=['GET'])
+def download():
+	file_name = request.args.get('name')
+	server = request.args.get('server')
+	channel = request.args.get('channel')
+	user = request.args.get('user')
+	pack = request.args.get('pack')
+	node_params = "%s %s %s %s" % (server, channel, user, pack)
+
+	success = execute_js("xdcc.js", arguments=node_params)
+
+	if success:
+		return send_from_directory(".", file_name)
+	return "error"
 #----------------------------------------
 # launch
 #----------------------------------------
