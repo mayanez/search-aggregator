@@ -1,4 +1,5 @@
 import haruhichanScraper
+import ixircScraper
 import os
 from flask import Flask, render_template, send_from_directory, request
 
@@ -19,8 +20,13 @@ def index():
 @app.route("/search", methods=['GET'])
 def search():
 	query = request.args.get('q')
-	scraper = haruhichanScraper.haruhichanScraper()
-	xdcc_file_list = scraper.search(query)
+	haruhichan_scraper = haruhichanScraper.haruhichanScraper()
+	ixirc_scraper = ixircScraper.ixircScraper()
+
+	haruhichan_xdcc_file_list = haruhichan_scraper.search(query)
+	ixirc_xdcc_file_list = ixirc_scraper.search(query)
+
+	xdcc_file_list = haruhichan_xdcc_file_list + ixirc_xdcc_file_list
 	return render_template('search.html', result=xdcc_file_list)
 
 #----------------------------------------

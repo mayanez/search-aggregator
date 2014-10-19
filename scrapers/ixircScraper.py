@@ -45,8 +45,9 @@ class ixircScraper(object):
 			channel = file_info[2].get_text()
 			user = file_info[3].get_text()
 			number = file_info[4].get_text()
+			gets = file_info[5].get_text()
 			size = file_info[6].get_text()
-			xdcc_file = XDCCFile.XDCCFile(name, network, channel, user, number, size)
+			xdcc_file = XDCCFile.XDCCFile(name, network, channel, user, number, size, gets)
 			xdcc_file_list.append(xdcc_file)
 
 		return xdcc_file_list
