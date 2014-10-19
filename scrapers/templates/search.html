@@ -1,6 +1,7 @@
 <head>
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+	<script src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<script>
 		$(document).ready(function() {
 			var table = $("#search-results").DataTable({
@@ -12,12 +13,13 @@
 			});
 		});
 	</script>
-	<link rel="stylesheet" href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css"></link>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css"></link>
 </head>
 <html>
 	<body>
 		<div>
-			<table id="search-results">
+			<table id="search-results" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<td>Name</td>
