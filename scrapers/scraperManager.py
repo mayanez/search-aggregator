@@ -1,14 +1,12 @@
 import haruhichanScraper
 import ixircScraper
 import os
-from flask import Flask, render_template, send_from_directory, request
-from Naked.toolshed.shell import execute_js, muterun_js
-from subprocess import call
-from twisted.internet import reactor, protocol
-from twisted.python import log as twistedlog
+import xdccbot
 import logging as log
 from multiprocessing import Process
-import xdccbot
+from flask import Flask, render_template, send_from_directory, request
+from twisted.internet import reactor, protocol
+from twisted.python import log as twistedlog
 
 
 app = Flask(__name__)
