@@ -7,6 +7,8 @@ class XDCCFile(object):
 		self.__number = number
 		self.__size = size
 		self.__requests = requests
+		self.__crunchyroll = False
+		self.__link = ""
 
 	def __str__(self):
 		return self.__name
@@ -67,5 +69,13 @@ class XDCCFile(object):
 	@requests.setter
 	def requests(self, value):
 		self.__requests = value
+
+	@property
+	def crunchyroll(self):
+		return self.__crunchyroll
+
+	@crunchyroll.setter
+	def crunchyroll(self, value):
+		self.__crunchyroll = value
 
 

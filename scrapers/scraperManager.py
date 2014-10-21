@@ -2,12 +2,14 @@ import haruhichanScraper
 import ixircScraper
 import os
 import xdccbot
+import KickassAPI
 import logging as log
 from multiprocessing import Process
 from flask import Flask, render_template, send_from_directory, request
 from twisted.internet import reactor, protocol
 from twisted.python import log as twistedlog
-
+from crunchyroll.apis.meta import MetaApi
+from tpb import TPB
 
 app = Flask(__name__)
 
@@ -15,6 +17,12 @@ app = Flask(__name__)
 app.config.update(
     DEBUG = True,
 )
+
+haruhichan_scraper = haruhichanScraper.haruhichanScraper()
+ixirc_scraper = ixircScraper.ixircScraper()
+crunchyroll = MetaApi()
+tpb = TPB('https://thepiratebay.org')
+
 #----------------------------------------
 # controllers
 #----------------------------------------
@@ -26,14 +34,15 @@ def index():
 @app.route("/search", methods=['GET'])
 def search():
     query = request.args.get('q')
-    haruhichan_scraper = haruhichanScraper.haruhichanScraper()
-    ixirc_scraper = ixircScraper.ixircScraper()
+
 
     haruhichan_xdcc_file_list = haruhichan_scraper.search(query)
     ixirc_xdcc_file_list = ixirc_scraper.search(query)
-
+    crunchyroll_series = crunchyroll.search_anime_series(query)
+    kickass_torrents = KickassAPI.Search(query)
+    tpb_torrents = tpb.search(query)
     xdcc_file_list = haruhichan_xdcc_file_list + ixirc_xdcc_file_list
-    return render_template('search.html', result=xdcc_file_list)
+    return render_template('search.html', result=xdcc_file_list, crunchyroll=crunchyroll_series, torrents=kickass_torrents, tpb_torrents=tpb_torrents)
 
 @app.route("/download", methods=['GET'])
 def download():
