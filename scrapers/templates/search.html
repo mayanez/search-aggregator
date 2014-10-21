@@ -31,6 +31,14 @@
 			{% endfor %}
 			</ul>
 		</div>
+		<div id="animeseason">
+			<h3><img src="http://www.blogulous.com/wp-content/uploads/2013/08/Anime-Season-Logo.png" /> Results</h3>
+			<ul>
+			{% for s in animeseason %}
+				<li><a href="{{s.url}}">{{s.name}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
 		<div id="gooddrama">
 			<h3><img src="http://www.gooddrama.net/images/site/front/logo.png" /> Results</h3>
 			<ul>

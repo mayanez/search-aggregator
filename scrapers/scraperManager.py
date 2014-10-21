@@ -2,6 +2,7 @@ import haruhichanScraper
 import ixircScraper
 import daddictsScraper
 import gooddramaScraper
+import animeseasonScraper
 import os
 import xdccbot
 import KickassAPI
@@ -26,7 +27,7 @@ ixirc_scraper = ixircScraper.ixircScraper()
 daddicts_scraper = daddictsScraper.DAddictsScraper()
 crunchyroll = MetaApi()
 gooddrama_scraper = gooddramaScraper.GoodDramaScraper()
-
+animeseason_scraper = animeseasonScraper.AnimeSeasonScraper()
 tpb = TPB('https://thepiratebay.org')
 
 #----------------------------------------
@@ -51,6 +52,7 @@ def search():
     #Streaming Sites
     crunchyroll_series = crunchyroll.search_anime_series(query)
     gooddrama_series = gooddrama_scraper.search(query)
+    animeseason_series = animeseason_scraper.search(query)
 
     #Torrents
     #TODO: Unify results into one Torrent object
@@ -59,7 +61,7 @@ def search():
     daddicts_torrents = daddicts_scraper.search(query)
     
 
-    return render_template('search.html', xdcc=xdcc_file_list, crunchyroll=crunchyroll_series, gooddrama=gooddrama_series, torrents=kickass_torrents, tpb_torrents=tpb_torrents, daddicts_torrents=daddicts_torrents)
+    return render_template('search.html', xdcc=xdcc_file_list, crunchyroll=crunchyroll_series, gooddrama=gooddrama_series, animeseason=animeseason_series, torrents=kickass_torrents, tpb_torrents=tpb_torrents, daddicts_torrents=daddicts_torrents)
 
 @app.route("/download", methods=['GET'])
 def download():
