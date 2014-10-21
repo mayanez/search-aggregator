@@ -1,5 +1,7 @@
 import haruhichanScraper
 import ixircScraper
+import daddictsScraper
+import gooddramaScraper
 import os
 import xdccbot
 import KickassAPI
@@ -18,9 +20,13 @@ app.config.update(
     DEBUG = True,
 )
 
+#Initiaze various search engines
 haruhichan_scraper = haruhichanScraper.haruhichanScraper()
 ixirc_scraper = ixircScraper.ixircScraper()
+daddicts_scraper = daddictsScraper.DAddictsScraper()
 crunchyroll = MetaApi()
+gooddrama_scraper = gooddramaScraper.GoodDramaScraper()
+
 tpb = TPB('https://thepiratebay.org')
 
 #----------------------------------------
@@ -35,14 +41,25 @@ def index():
 def search():
     query = request.args.get('q')
 
-
+    #Call search engines
+    
+    #XDCC
     haruhichan_xdcc_file_list = haruhichan_scraper.search(query)
     ixirc_xdcc_file_list = ixirc_scraper.search(query)
+    xdcc_file_list = haruhichan_xdcc_file_list + ixirc_xdcc_file_list
+
+    #Streaming Sites
     crunchyroll_series = crunchyroll.search_anime_series(query)
+    gooddrama_series = gooddrama_scraper.search(query)
+
+    #Torrents
+    #TODO: Unify results into one Torrent object
     kickass_torrents = KickassAPI.Search(query)
     tpb_torrents = tpb.search(query)
-    xdcc_file_list = haruhichan_xdcc_file_list + ixirc_xdcc_file_list
-    return render_template('search.html', result=xdcc_file_list, crunchyroll=crunchyroll_series, torrents=kickass_torrents, tpb_torrents=tpb_torrents)
+    daddicts_torrents = daddicts_scraper.search(query)
+    
+
+    return render_template('search.html', xdcc=xdcc_file_list, crunchyroll=crunchyroll_series, gooddrama=gooddrama_series, torrents=kickass_torrents, tpb_torrents=tpb_torrents, daddicts_torrents=daddicts_torrents)
 
 @app.route("/download", methods=['GET'])
 def download():

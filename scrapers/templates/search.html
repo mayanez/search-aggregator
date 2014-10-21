@@ -31,6 +31,14 @@
 			{% endfor %}
 			</ul>
 		</div>
+		<div id="gooddrama">
+			<h3><img src="http://www.gooddrama.net/images/site/front/logo.png" /> Results</h3>
+			<ul>
+			{% for s in gooddrama %}
+				<li><a href="{{s.url}}">{{s.name}}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
 		<div>
 			<h3>XDCC Results</h3>
 			<table id="xdcc-search-results" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -46,7 +54,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				{% for file in result %}
+				{% for file in xdcc %}
 					<tr>
 						<td><a href="/download?name={{file.name}}&server={{file.network}}&channel={{file.channel}}&user={{file.user}}&pack={{file.number}}">{{file.name}}</a></td>
 						<td>{{file.network}}</td>
@@ -65,6 +73,7 @@
 			<table id="torrent-search-results" class="table table-striped table-bordered" cellspacing="0" width="100%">
 				<thead>
 					<tr>
+						<td>Source</td>
 						<td>Name</td>
 						<td>Category</td>
 						<td>Size</td>
@@ -75,6 +84,7 @@
 				<tbody>
 				{% for t in torrents %}
 					<tr>
+						<td>Kickass</td>
 						<td><a href="{{t.torrent_link}}">{{t.name}}</a></td>
 						<td>{{t.category}}</td>
 						<td>{{t.size}}</td>
@@ -84,11 +94,22 @@
 				{% endfor %}
 				{% for t in tpb_torrents %}
 					<tr>
+						<td>TPB</td>
 						<td><a href="{{t.url}}">{{t.title}}</a></td>
 						<td>{{t.category}}</td>
 						<td>{{t.size}}</td>
 						<td>{{t.seeders}}</td>
 						<td>{{t.leechers}}</td>
+					</tr>
+				{% endfor %}
+				{% for t in daddicts_torrents %}
+					<tr>
+						<td>DAddicts</td>
+						<td><a href="{{t.download_link}}">{{t.name}}</a></td>
+						<td>{{t.category}}</td>
+						<td>{{t.size}}</td>
+						<td>{{t.seed}}</td>
+						<td>{{t.leech}}</td>
 					</tr>
 				{% endfor %}
 				</tbody>
