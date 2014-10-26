@@ -35,7 +35,7 @@ webapp_port = Config.get("webapp", "port")
 downloadPath = Config.get("xdcc", "downloadpath")
 xdccNick = Config.get("xdcc", "nick")
 transmission_rpc_host = Config.get("transmission", "rpc-host")
-transmission_rpc_port = Config.get("transmission", "rpc-port")
+transmission_rpc_port = int(Config.get("transmission", "rpc-port"))
 transmission_redirect_url = Config.get("transmission", "redirect-url")
 transmission_rpc_username = Config.get("transmission", "username")
 transmission_rpc_password = Config.get("transmission", "password")
@@ -55,7 +55,7 @@ xdccPool = []
 #----------------------------------------
 # controllers
 #----------------------------------------
-
+        
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -78,7 +78,10 @@ def search():
 
     #Torrents
     #TODO: Unify results into one Torrent object
-    kickass_torrents = KickassAPI.Search(query)
+    try:
+        kickass_torrents = KickassAPI.Search(query)
+    except:
+        kickass_torrents = list()
     tpb_torrents = tpb.search(query)
     daddicts_torrents = daddicts_scraper.search(query)
     shanaproject_torrents = shanaproject_scraper.search(query)
