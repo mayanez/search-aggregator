@@ -1,0 +1,13 @@
+[webapp]
+port = 8888
+
+[xdcc]
+downloadpath = /
+nick = "nick"
+
+[transmission]
+rpc-host = torrentserver
+rpc-port = 9091
+redirect-url = http://torrentserver:9091/
+username = transmission
+password = transmission

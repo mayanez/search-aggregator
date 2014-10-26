@@ -31,10 +31,11 @@ if Config.read('settings.cfg') == []:
     print "Please copy the settings.cfg.example to settings.cfg"
     raise Exception('Could not read config file')
 
-downloadPath = Config.get("downloadpath")
-xdccNick = Config.get("xdccnick")
+webapp_port = Config.get("webapp", "port")
+downloadPath = Config.get("xdcc", "downloadpath")
+xdccNick = Config.get("xdcc", "nick")
 transmission_rpc_host = Config.get("transmission", "rpc-host")
-transmission_rpc_port = Config.get("transmission", "port")
+transmission_rpc_port = Config.get("transmission", "rpc-port")
 transmission_redirect_url = Config.get("transmission", "redirect-url")
 transmission_rpc_username = Config.get("transmission", "username")
 transmission_rpc_password = Config.get("transmission", "password")
@@ -121,5 +122,5 @@ def do_xdcc(server, channel, user, pack):
     bot.start()
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", Config.get("webapp", "port")))
+    port = int(os.environ.get("PORT", webapp_port))
     app.run(host='0.0.0.0', port=port)
