@@ -64,7 +64,7 @@
 				<tbody>
 				{% for file in xdcc %}
 					<tr>
-						<td><a href="/download?name={{file.name}}&server={{file.network}}&channel={{file.channel}}&user={{file.user}}&pack={{file.number}}">{{file.name}}</a></td>
+						<td><a href="/xdcc?server={{file.network}}&channel={{file.channel}}&user={{file.user}}&pack={{file.number}}">{{file.name}}</a></td>
 						<td>{{file.network}}</td>
 						<td>{{file.channel}}</td>
 						<td>{{file.user}}</td>
